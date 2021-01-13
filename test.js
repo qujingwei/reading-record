@@ -7,22 +7,17 @@ Super.prototype.sayName = function(){
 }
 
 function Sub (name, age){
-    // 继承Super
     Super.call(this, name)
     this.age = age
 }
-Sub.prototype = new Super()
+// Sub.prototype = new Super()  把这行代码替换成下面一行
+Sub.prototype = Object.create(Super.prototype)
+
+Sub.prototype.constructor = Sub
 Sub.prototype.sayAge = function(){
     console.log(this.age);
 }
-Sub.prototype.constructor = Sub
 
-let instance1 = new Sub('小明', 15)
-instance1.colors.push('black')
-console.log(instance1.colors);   //[ 'red', 'blue', 'green', 'black' ]
-instance1.sayName() //小明
-instance1.sayAge()  //15
 
-let instance2 = new Sub('小王', 18)
-instance2.sayName() //小王
-instance2.sayAge()  //18
+
+
